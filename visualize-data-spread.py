@@ -15,7 +15,7 @@ plt.rc('xtick',labelsize=16)
 plt.rc('ytick',labelsize=16)
 
 class Dataset:
-    def __init__(descriptor_src, response_src=None, response_cols=None):
+    def __init__(self, descriptor_src, response_src=None, response_cols=None):
         """
         Parameters
         ----------
@@ -49,7 +49,8 @@ class Dataset:
         pca = PCA()
         self.pca_transformed_dataset = pca.fit_transform(scaled_X)
 
-    def project_in_principal_components(projection_axis_1=0, 
+    def project_in_principal_components(self,
+                                        projection_axis_1=0, 
                                         projection_axis_2=1, **kwargs):
         """ Project the input data into two principal components 
         denoted by projection_axis_1 and projection_axis_1.
@@ -68,9 +69,9 @@ class Dataset:
             Key word arguments for modifying plotting behavior.
         
         """
-        plot_params = {'alpha': 0.7,
-                       's': 10,
-                       'c': 'green',
+        plot_params = {'alpha': 0.2,
+                       's': 2,
+                       'c': 'pink',
                        }
         if kwargs is not None:
             plot_params.update(kwargs)
@@ -81,7 +82,7 @@ class Dataset:
                     self.pca_transformed_dataset[:, projection_axis_2],
                     **plot_params)
         plt.xlabel(f'Principal Component {projection_axis_1+1}', fontsize=20)
-        plt.xlabel(f'Principal Component {projection_axis_2+1}', fontsize=20)
+        plt.ylabel(f'Principal Component {projection_axis_2+1}', fontsize=20)
         plt.show()
 
 
@@ -97,8 +98,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
     data_set = Dataset(descriptor_src=args.descriptor_src, 
                        response_src=args.response_src, 
-                       response_cols=[args.response_column])
-    dataset.project_in_principal_components(projection_axis_1=0, 
+                       response_cols=args.response_column)
+    data_set.project_in_principal_components(projection_axis_1=0, 
                                             projection_axis_2=1,)
 
 
