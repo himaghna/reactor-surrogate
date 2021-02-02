@@ -70,7 +70,7 @@ class Dataset:
         
         """
         plot_params = {'alpha': 0.2,
-                       's': 2,
+                       's': 5,
                        'c': 'pink',
                        }
         if kwargs is not None:
